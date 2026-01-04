@@ -1,15 +1,11 @@
 public class GhostscriptCommandBuilder {
-    String gsPath = "gswin64c";
+    String gsPath;
     String inputFile;
     private String outputFile;
     private CompressionQuality quality;
 
     public GhostscriptCommandBuilder setGsPath(String gsPath) {
         this.gsPath = gsPath;
-        return this;
-    }
-
-    public GhostscriptCommandBuilder setGsPath() {
         return this;
     }
 
@@ -28,11 +24,12 @@ public class GhostscriptCommandBuilder {
         return this;
     }
 
-    public GhostscriptCommand build() {
-        if (inputFile == null) inputFile = "input.pdf";
-        if (outputFile == null) outputFile = "output.pdf";
-        if (quality == null) quality = CompressionQuality.SCREEN;
+    public GhostscriptCommand build(AppConfig config) {
+        if (gsPath == null) gsPath = config.getGhostscriptPath();
+        if (inputFile == null) inputFile = config.getDefaultInput();
+        if (outputFile == null) outputFile = config.getDefaultOutput();
+        if (quality == null) quality = config.getDefaultQuality();
 
-        return new GhostscriptCommand(inputFile, outputFile, quality);
+        return new GhostscriptCommand(gsPath, inputFile, outputFile, quality);
     }
 }

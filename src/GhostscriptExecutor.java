@@ -6,8 +6,8 @@ public class GhostscriptExecutor {
         int exitCode = process.waitFor();
 
         if (exitCode != 0) {
-            throw new RuntimeException("Ghostscript command exited with code " + exitCode);
+            throw new RuntimeException("Ghostscript failed: " + exitCode);
         }
-        System.out.println("Compressed PDF file created!");
+        System.out.println("Compressed Pdf file: " + ghostscriptCommand.inputFile() + " to " + ghostscriptCommand.outputFile());
     }
 }
