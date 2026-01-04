@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class AppConfig {
-    private Properties prop = new Properties();
+    private final Properties prop = new Properties();
 
     public AppConfig(String configFile) throws IOException {
         try (FileInputStream fis = new FileInputStream(configFile)) {
